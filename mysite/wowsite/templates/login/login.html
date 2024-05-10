@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static "css/login.css" %}"
+</head>
+<body >
+    <div class="login-container">
+        <h2>Login</h2>
+        <form action="login.php" method="post" aria-labelledby="Login">
+            <input type="text" name="username" placeholder="Username" required label="Username" maxlength="35" autocomplete="off" >
+            <input type="password" name="password" placeholder="Password" label="Password" required maxlength="40" autocomplete="off">
+            <button type="submit" aria-label="Submit">Submit</button>
+        </form>
+        <a href="/account/register" aria-label="Register an account">Register an account</a>
+        <a href="/account/forgot_login" aria-label="Can't log in?">Can't log in?</a>
+    </div>
+    <div class="block bl"></div>
+    <div class="block2 bl"></div>
+    <div class="block3 bl"></div>
+    <div class="block4 bl"></div>
+    <div class="block5 bl"></div>
+    <div class="block6 bl"></div>
+    <div class="block7 bl"></div>
+    <div class="block8 bl"></div>
+    <div class="block9 bl"></div>
+    
+</body>
+</html>

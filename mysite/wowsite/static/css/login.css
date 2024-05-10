@@ -1,0 +1,233 @@
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background: linear-gradient(90deg, #B3FFAB, #12FFF7);
+}
+
+
+
+.bl:hover {
+    animation-play-state: paused;
+}
+
+
+
+.login-container {
+    border: 1px solid #333;
+    background-color: rgba(255, 255, 255, 0.749);
+    box-shadow: 0 0 60px 2px #333;
+    border-radius: 5px;
+    max-width: 300px;
+    margin: 100px auto;
+    padding: 20px;
+    z-index: 2;
+
+}
+
+.login-container h2 {
+    text-align: center;
+}
+
+
+input:hover{
+    transition: 1s ease;
+    background-color: #12FFF7;
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"] {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 8px 0;
+    padding: 5px;
+    width: 95%;
+    border: 1px solid #585858;
+    border-radius: 5px;
+    height: 20px;
+}
+
+.login-container button {
+    background-color: blue;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    box-shadow: 0 0 5px 2px #727272;
+}
+
+.login-container button:hover {
+    background-color: lightgreen;
+    color: rgb(0, 0, 0);
+    transition: 0.5s ease;
+    cursor: pointer;
+}
+
+a {
+    margin: 10px 0 0 0;
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    font-size: larger;
+    color: blue;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: green;
+    transition: 0.5s ease;
+}
+
+.block {
+    background-color: #571717;
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    z-index: -1;
+    top: 50px;
+}
+
+.block {
+    animation: move-block_left 2s infinite alternate, color-block 1s 1s forwards;
+}
+
+.block2 {
+    margin-left: auto;
+    background-color: #a92b8e;
+    height: 50px;
+    width: 50px;
+    z-index: -1;
+    top: 150px;
+    position: absolute;
+}
+
+.block2 {
+    animation: move-block 2.5s alternate infinite, color-block 1s 1s forwards;
+}
+
+
+.block3 {
+    background-color: #4454bc;
+    height: 50px;
+    width: 50px;
+    top: 250px;
+    position: absolute;
+    z-index: -1;
+
+}
+
+.block3 {
+    animation: move-block_left 3s infinite alternate, color-block 5s 5s forwards;
+}
+
+.block4 {
+    margin-left: auto;
+    background-color: #196640;
+    height: 50px;
+    width: 50px;
+    z-index: -1;
+    top: 350px;
+    position: absolute;
+}
+
+.block4 {
+    animation: move-block 4s alternate infinite, color-block 1s 1s forwards;
+}
+
+
+.block5 {
+    margin-left: auto;
+    background-color: #91b43a;
+    height: 50px;
+    width: 50px;
+    z-index: -1;
+    top: 450px;
+    position: absolute;
+}
+
+.block5 {
+    animation: move-block_left 3.5s alternate infinite, color-block 1s 1s forwards;
+}
+
+.block6 {
+    margin-left: auto;
+    background-color: #5f1a9b;
+    height: 50px;
+    width: 50px;
+    z-index: -1;
+    top: 550px;
+    position: absolute;
+}
+
+.block6 {
+    animation: move-block 3.4s alternate infinite, color-block 1s 1s forwards;
+}
+
+.block7 {
+    margin-left: auto;
+    background-color: #4ea50f;
+    height: 50px;
+    width: 50px;
+    z-index: -1;
+    top: 650px;
+    position: absolute;
+}
+
+.block7 {
+    animation: move-block_left 4.5s alternate infinite, color-block 1s 1s forwards;
+}
+
+.block8 {
+    margin-left: auto;
+    background-color: #e26b2b;
+    height: 50px;
+    width: 50px;
+    z-index: -1;
+    top: 750px;
+    position: absolute;
+}
+
+.block8 {
+    animation: move-block 3s alternate infinite, color-block 1s 1s forwards;
+}
+
+.block9 {
+    margin-left: auto;
+    background-color: #fa0068;
+    height: 50px;
+    width: 50px;
+    z-index: -1;
+    top: 850px;
+    position: absolute;
+}
+
+.block9 {
+    animation: move-block_left 2.5s alternate infinite, color-block 1s 1s forwards;
+}
+
+
+@keyframes move-block {
+    0% {
+        right: 0;
+        border-radius: 100px;
+    }
+
+
+    100% {
+        right: calc(100% - 200px);
+        border-radius: 100px
+    }
+}
+
+@keyframes move-block_left {
+    0% {
+        left: 0;
+        border-radius: 100px;
+    }
+
+
+    100% {
+        left: calc(100% - 200px);
+        border-radius: 100px
+    }
+}
+
