@@ -8,13 +8,7 @@ from .models import Task
 def main(request):
     return render(request, "main.html")
 
-def calculate():
-    x=1
-    y=2
-    return x
-
 def login(request):
-    x=calculate()
     return render(request, "login/login.html")
 
 def register(request):
