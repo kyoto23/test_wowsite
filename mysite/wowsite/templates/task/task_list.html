@@ -4,9 +4,11 @@
         <th>Item</th>
     </tr>
     {% for task in object_list %}
+    {% if not task.complete %}
     <tr>
         <td>{{task.title}}</td>
         <td><a href="{% url 'task' task.id %}">View</a></td>
     </tr>
+    {% endif %}
     {% endfor %}
 </table>
