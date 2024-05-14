@@ -4,9 +4,15 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from .models import Task
 
+menu = [{'title': 'Головна', 'url_name' : 'main'},
+        {'title': 'Вхід', 'url_name' : 'login'},
+        {'title': 'Реєстрація', 'url_name' : 'register'},
+        ]
+ 
 # Create your views here.
 def main(request):
-    return render(request, "main.html")
+    data = {'menu' : menu}
+    return render(request, "main.html", context=data)
 
 def login(request):
     return render(request, "login/login.html")
@@ -21,6 +27,7 @@ class TaskList(ListView):
     model = Task
     template_name = "task/task_list.html"
     context_object_name = 'tasks'
+
 
 class TaskDetail(DetailView):
     model = Task

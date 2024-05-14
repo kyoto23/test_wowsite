@@ -18,6 +18,11 @@
     <div class="wrapper">
         <div class="block">
             <a href="/tasks" aria-label="Click me">Click me</a>
+            <ul>
+                {% for m in menu %}
+                  <li><a href ="{% url m.url_name %}">{{ m.title }}</a></li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
 </body>
