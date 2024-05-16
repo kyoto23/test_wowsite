@@ -11,7 +11,7 @@ urlpatterns = [
     path('', views.main, name="main"),
     path('account/', include(loginpatterns), name='account'),
     path('tasks/', views.TaskList.as_view(), name='tasks'),
-    path('tasks/<int:pk>/', views.TaskDetail.as_view(), name='task')
+    path('tasks/<int:pk>/', views.TaskDetail.as_view(), name='task'),
 ]
 
 
