@@ -1,0 +1,3 @@
+{% for m in menu %}
+<li><a href="{% url 'menu' m.id %}">{{m.title}}</a></li>
+{% endfor %}

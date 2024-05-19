@@ -12,6 +12,7 @@ urlpatterns = [
     path('account/', include(loginpatterns), name='account'),
     path('tasks/', views.TaskList.as_view(), name='tasks'),
     path('tasks/<int:pk>/', views.TaskDetail.as_view(), name='task'),
+    path('menu/<int:id>', views.show_menu, name='menu'),
 ]
 
 
