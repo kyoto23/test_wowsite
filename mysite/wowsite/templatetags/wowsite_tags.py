@@ -7,12 +7,12 @@ register = template.Library()
 def get_menu():
     return views.menu
 
-@register.inclusion_tag('wowsite/list_menu.html')
+@register.inclusion_tag('wowsite/base_and_tags/list_menu.html')
 def show_menu():
     menu = views.menu
     return {'menu': menu}
 
-@register.inclusion_tag("wowsite/classes/navigation.html")
+@register.inclusion_tag("wowsite/base_and_tags/navigation.html")
 def navigation():
     menu = views.menu
     return {'menu':menu}

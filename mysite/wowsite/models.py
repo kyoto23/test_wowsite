@@ -20,6 +20,7 @@ class Task(models.Model):
 
 class WowClass(models.Model):
     title = models.CharField(max_length=30)
+    slug = models.SlugField(max_length=20, unique=True, db_index=True)
     description = models.TextField(blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -27,3 +28,9 @@ class WowClass(models.Model):
 
     def __str__(self):
         return self.title
+    
+    class Meta:
+        ordering = ['created']
+        indexes = [
+            models.Index(fields=['created'])
+        ]

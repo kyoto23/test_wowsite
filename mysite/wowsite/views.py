@@ -1,8 +1,8 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from .models import Task
+from .models import Task, WowClass
 
 menu = [{'id':1, 'title': 'Головна', 'url_name' : 'main'},
         {'id':2, 'title': 'Вхід', 'url_name' : 'login'},
@@ -11,7 +11,7 @@ menu = [{'id':1, 'title': 'Головна', 'url_name' : 'main'},
 
 # Create your views here.
 def main(request):
-    return render(request, "base.html")
+    return render(request, "wowsite/main.html")
 
 def login(request):
     return render(request, "wowsite/login/login.html")
@@ -24,6 +24,20 @@ def forgot_login(request):
 
 def show_menu(request, id):
     return main(request)
+
+def show_class(request, class_slug):
+    post = get_object_or_404(WowClass, slug=class_slug)
+
+    data = {
+        'title': post.title,
+        'post': post,
+    }
+    return render(request, "wowsite/classes/class_detail.html", data)
+
+class ClassList(ListView):
+    model = WowClass
+    template_name = "wowsite/classes/class_list.html"
+    context_object_name = 'classes'
 
 class TaskList(ListView):
     model = Task

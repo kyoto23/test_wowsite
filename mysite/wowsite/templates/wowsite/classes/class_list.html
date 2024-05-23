@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>WowClasses List</h1>
+<table>
+    {% for class in object_list %}
+    {% if class.is_published %}
+    <tr>
+        <td>{{class.title}}</td>
+        <td><a href="{% url 'class' class.slug %}">View</a></td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+</table>
+<p><a href="{% url 'main' %}">Back to Main</a></p>
+{% endblock content %}
