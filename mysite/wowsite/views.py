@@ -1,3 +1,5 @@
+from typing import Any
+from django.db.models.query import QuerySet
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.views.generic.list import ListView
@@ -25,19 +27,18 @@ def forgot_login(request):
 def show_menu(request, id):
     return main(request)
 
-def show_class(request, class_slug):
-    post = get_object_or_404(WowClass, slug=class_slug)
-
-    data = {
-        'title': post.title,
-        'post': post,
-    }
-    return render(request, "wowsite/classes/class_detail.html", data)
-
 class ClassList(ListView):
     model = WowClass
     template_name = "wowsite/classes/class_list.html"
     context_object_name = 'classes'
+
+    def get_queryset(self):
+        return WowClass.published.filter()
+    
+class ClassDetail(DetailView):
+    model = WowClass
+    template_name = "wowsite/classes/class_detail.html"
+    context_object_name = 'class'
 
 class TaskList(ListView):
     model = Task

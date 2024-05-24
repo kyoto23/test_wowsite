@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>{{post.title}}</h1>
+<h1>{{class.title}}</h1>
 
-{% if post.photo %}
-<p><img class="img-article-left" src="{{post.photo.url}}"></p>
+{% if class.photo %}
+<p><img class="img-article-left" src="{{class.photo.url}}"></p>
 {% endif %}
 
-{{post.description | linebreaks}}
+{{ class.description | linebreaks }}
 
 <p><a href="{% url 'classes' %}">Back to Classes</a></p>
 {% endblock content %}
