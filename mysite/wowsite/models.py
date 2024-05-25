@@ -33,6 +33,7 @@ class WowClass(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(choices=Status.choices, default=Status.DRAFT)
+    roles = models.ManyToManyField("Role", related_name='roles')
 
     published = PublishedManager()
     objects = models.Manager()
@@ -45,3 +46,20 @@ class WowClass(models.Model):
         indexes = [
             models.Index(fields=['created'])
         ]
+
+class Specialization(models.Model):
+    title = models.CharField(max_length=30)
+    description = models.TextField(blank=True, default='')
+    slug = models.SlugField(max_length=30, unique=True, db_index=True)
+    wow_class = models.ForeignKey("WowClass", on_delete=models.PROTECT, related_name='wow_class')
+    role = models.ForeignKey("Role", on_delete=models.PROTECT,null=True, related_name='role')
+
+    def __str__(self):
+        return self.title
+
+class Role(models.Model):
+    title = models.CharField(max_length=10, db_index=True)
+    slug = models.SlugField(max_length=10, unique=True, db_index=True)
+
+    def __str__(self):
+        return self.title
