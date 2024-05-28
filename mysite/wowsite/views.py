@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from .models import Task, WowClass
+from .models import Role, Specialization, Task, WowClass
 
 menu = [{'id':1, 'title': 'Головна', 'url_name' : 'main'},
         {'id':2, 'title': 'Вхід', 'url_name' : 'login'},
@@ -24,8 +24,17 @@ def register(request):
 def forgot_login(request):
     return render(request, "wowsite/login/forgot_login.html")
 
-def show_menu(request, id):
-    return main(request)
+def show_roles(request, role_slug):
+    role = get_object_or_404(Role, slug = role_slug)
+    posts = Specialization.objects.filter(role_id = role.pk)
+
+    data = {
+        'title': f'Роль: {role.title}',
+        'menu': menu,
+        'posts': posts,
+        'role_selected': role.pk
+    }
+    return render(request, 'wowsite/classes/index.html', context=data)
 
 class ClassList(ListView):
     model = WowClass
@@ -43,7 +52,7 @@ class ClassDetail(DetailView):
 class TaskList(ListView):
     model = Task
     template_name = "wowsite/task/task_list.html"
-    context_object_name = 'tasks'
+    context_object_name = 'task'
 
 class TaskDetail(DetailView):
     model = Task
