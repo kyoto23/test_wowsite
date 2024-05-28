@@ -1,12 +1,6 @@
-{% extends "base.html" %}
-{% block content %}
-
-{% for role in roles %}
-{% if role.id == role_selected %}
-<li class="selected">{{ role.title }}</li>
-{% else %}
-<li><a href="{{ role.get_absolute_url }}">{{role.title}}</a></li>
-{% endif %}
-{% endfor %}
-
-{% endblock content %}
+<ul>
+    <b><li class="selected">Roles:</li></b>
+    {% for role in roles %}
+    <li><a href="{{role.get_absolute_url}}">{{role.title}}</a></li>
+    {% endfor %}
+</ul>

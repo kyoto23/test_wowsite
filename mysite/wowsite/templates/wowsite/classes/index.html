@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
-
+{% load wowsite_tags%}
 {% block content %}
+{% show_roles %}
 <ul class="list-articles">
 	{% for p in posts %}
-			<li><div class="article-panel">
+			{% comment %} <li><div class="article-panel"> {% endcomment %}
 	<p class="first">Категория: {{p.role.title}}</p>
     </div>
 				<h2>{{p.title}}</h2>

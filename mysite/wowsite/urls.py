@@ -14,7 +14,7 @@ urlpatterns = [
     path('task/<int:pk>/', views.TaskDetail.as_view(), name='task'),
     path('class/', views.ClassList.as_view(), name='classes'),
     path('class/<slug:slug>/', views.ClassDetail.as_view(), name='class'),
-    path('role/<slug:role_slug>', views.show_roles, name='roles'),
+    path('role/<slug:role_slug>', views.show_roles, name='role'),
 ]
 
 
