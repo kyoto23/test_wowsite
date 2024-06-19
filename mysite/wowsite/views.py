@@ -30,7 +30,6 @@ def show_roles(request, role_slug):
 
     data = {
         'title': f'Роль: {role.title}',
-        'menu': menu,
         'posts': posts,
         'role_selected': role.pk
     }
@@ -52,7 +51,7 @@ class ClassDetail(DetailView):
 class TaskList(ListView):
     model = Task
     template_name = "wowsite/task/task_list.html"
-    context_object_name = 'task'
+    context_object_name = 'tasks'
 
 class TaskDetail(DetailView):
     model = Task

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'wowsite.apps.WowsiteConfig',
     'debug_toolbar',
+    'taggit',
 ]
 
 MIDDLEWARE = [

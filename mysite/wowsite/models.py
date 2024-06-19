@@ -1,8 +1,7 @@
-from datetime import datetime
 from django.db import models
 from django.urls import reverse
-from django.utils import timezone
 from django.contrib.auth.models import User
+from taggit.managers import TaggableManager
 
 # Create your models here.
 
@@ -35,12 +34,16 @@ class WowClass(models.Model):
     updated = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(choices=Status.choices, default=Status.DRAFT)
     roles = models.ManyToManyField("Role", related_name='roles')
+    tags = TaggableManager()    
 
     published = PublishedManager()
     objects = models.Manager()
 
     def __str__(self):
         return self.title
+    
+    def get_absolute_url(self):
+        return reverse("class", kwargs={"slug": self.slug})
     
     class Meta:
         ordering = ['created']

@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>WowClasses List</h1>
+<h1>Tags List</h1>
 <table>
-    {% for class in classes %}
+    {% for tag in WowClass.tags.all %}
     <tr>
         <td>{{class.title}}</td>
         <td><a href="{{ class.get_absolute_url }}">View</a></td>
