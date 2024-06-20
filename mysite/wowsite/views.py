@@ -1,10 +1,11 @@
 from typing import Any
 from django.db.models.query import QuerySet
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import render
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from .models import Role, Specialization, Task, WowClass
+from .services import spec_by_role
 
 menu = [{'id':1, 'title': 'Головна', 'url_name' : 'main'},
         {'id':2, 'title': 'Вхід', 'url_name' : 'login'},
@@ -25,13 +26,10 @@ def forgot_login(request):
     return render(request, "wowsite/login/forgot_login.html")
 
 def show_roles(request, role_slug):
-    role = get_object_or_404(Role, slug = role_slug)
-    posts = Specialization.objects.filter(role_id = role.pk)
+    queryset = spec_by_role(role_slug)
 
     data = {
-        'title': f'Роль: {role.title}',
-        'posts': posts,
-        'role_selected': role.pk
+        'posts': queryset,
     }
     return render(request, 'wowsite/classes/index.html', context=data)
 

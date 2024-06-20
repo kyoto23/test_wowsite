@@ -1,5 +1,5 @@
 from django import template
-from wowsite.models import Role, Specialization
+from wowsite.models import Role
 import wowsite.views as views
 
 register = template.Library()

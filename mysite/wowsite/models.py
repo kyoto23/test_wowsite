@@ -46,6 +46,8 @@ class WowClass(models.Model):
         return reverse("class", kwargs={"slug": self.slug})
     
     class Meta:
+        verbose_name = "Класси"
+        verbose_name_plural = "Класси"
         ordering = ['created']
         indexes = [
             models.Index(fields=['created'])
@@ -60,6 +62,10 @@ class Specialization(models.Model):
 
     def __str__(self):
         return self.title
+    
+    class Meta:
+        verbose_name = "Спеціалізації"
+        verbose_name_plural = "Спеціалізації"
 
 class Role(models.Model):
     title = models.CharField(max_length=10, db_index=True)
@@ -70,4 +76,11 @@ class Role(models.Model):
     
     def get_absolute_url(self):
         return reverse("role", kwargs={"role_slug": self.slug})
+    
+    class Meta:
+        verbose_name = "Ролі"
+        verbose_name_plural = "Ролі"
+        indexes = [
+            models.Index(fields=['slug'])
+        ]
     
