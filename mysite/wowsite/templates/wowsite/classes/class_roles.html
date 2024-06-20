@@ -1,0 +1,6 @@
+<ul>
+    <b><li class="selected">Roles:</li></b>
+    {% for role in roles %}
+    <li><a href="{{role.get_absolute_url}}">{{role.title}}</a></li>
+    {% endfor %}
+</ul>

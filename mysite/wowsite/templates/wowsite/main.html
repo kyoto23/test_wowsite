@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 {% load static %}
+{% load wowsite_tags %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static "css/style_main.css" %}" />
+    <link rel="stylesheet" href="{% static "wowsite/css/style_main.css" %}" />
     <link href="https://fonts.googleapis.com/css2?family=Long+Cang&family=Noto+Serif+SC:wght@200;300;400;500;600;700;900&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" href="{% static "images/kyoko.jpg" type="image/x-icon" %}">
+    <link rel="shortcut icon" href="{% static "wowsite/images/kyoko.jpg" type="image/x-icon" %}">
     <title>Agents</title>
 </head>
 <body>
@@ -17,7 +18,11 @@
     </div>
     <div class="wrapper">
         <div class="block">
-            <a href="/tasks" aria-label="Click me">Click me</a>
+            <a href="{% url 'tasks' %}" aria-label="Click me">ToDo List</a>
+            <ul>
+                {% navigation %}
+                {% show_roles %}
+            </ul>
         </div>
     </div>
 </body>

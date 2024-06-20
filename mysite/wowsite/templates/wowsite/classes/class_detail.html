@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{class.title}}</h1>
+<li>Tags:</li>
+{% for tag in class.tags.all %}
+<li><a href="{{tag.get_absolute_url}}">{{ tag.name }}</a></li>
+{% endfor %}
+
+{% if class.photo %}
+<p><img class="img-article-left" src="{{class.photo.url}}"></p>
+{% endif %}
+
+{{ class.description | linebreaks }}
+
+<p><a href="{% url 'classes' %}">Back to Classes</a></p>
+{% endblock content %}
