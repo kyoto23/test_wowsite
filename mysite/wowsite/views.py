@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from .models import Role, Specialization, Task, WowClass
-from .services import spec_by_role
+from .services import spec_by_role, published_class
 
 menu = [{'id':1, 'title': 'Головна', 'url_name' : 'main'},
         {'id':2, 'title': 'Вхід', 'url_name' : 'login'},
@@ -27,10 +27,8 @@ def forgot_login(request):
 
 def show_roles(request, role_slug):
     queryset = spec_by_role(role_slug)
+    data = {'posts': queryset}
 
-    data = {
-        'posts': queryset,
-    }
     return render(request, 'wowsite/classes/index.html', context=data)
 
 class ClassList(ListView):
@@ -39,7 +37,7 @@ class ClassList(ListView):
     context_object_name = 'classes'
 
     def get_queryset(self):
-        return WowClass.published.filter()
+        return published_class(self.model)
     
 class ClassDetail(DetailView):
     model = WowClass
