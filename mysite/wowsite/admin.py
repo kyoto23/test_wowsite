@@ -3,7 +3,7 @@ from .models import Task, WowClass, Role, Specialization
 
 @admin.register(WowClass)
 class WowClassAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'created', 'is_published')
+    list_display = ('id', 'title', 'created', 'is_published',)
     list_display_links = ('id', 'title')
     list_editable = ('is_published', )
     
