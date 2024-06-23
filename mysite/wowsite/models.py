@@ -37,9 +37,9 @@ class WowClass(models.Model):
     roles = models.ManyToManyField("Role", related_name='roles', verbose_name="Ролі")
     tags = TaggableManager(verbose_name="Теги")    
 
-    published = PublishedManager()
     objects = models.Manager()
-
+    published = PublishedManager()
+    
     def __str__(self):
         return self.title
     
@@ -84,4 +84,5 @@ class Role(models.Model):
         indexes = [
             models.Index(fields=['slug'])
         ]
+        ordering = ['pk']
     

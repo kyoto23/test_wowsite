@@ -1,12 +1,29 @@
-from django.contrib import admin
+from django.contrib import admin, messages
 from .models import Task, WowClass, Role, Specialization
 
 @admin.register(WowClass)
 class WowClassAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'created', 'is_published',)
-    list_display_links = ('id', 'title')
+    list_display = ('title', 'created', 'is_published', 'brief_info')
+    list_display_links = ('title', )
     list_editable = ('is_published', )
+    actions = ['set_published', 'set_draft']
+    search_fields = ['title__startswith', 'tags__name']
+    list_filter = ['roles__title', 'is_published']
+
+    @admin.display(description="Довжина опису", ordering='description')
+    def brief_info(self, wowclass: WowClass):
+        return f"Опис {len(wowclass.description)} символів."
     
+    @admin.display(description="Задати статус - PUBLISHED")
+    def set_published(self, request, queryset):
+        count = queryset.update(is_published=WowClass.Status.PUBLISHED)
+        self.message_user(request, f"Змінено {count} записа/-ів")
+
+    @admin.display(description="Задати статус - DRAFT")
+    def set_draft(self, request, queryset):
+        count = queryset.update(is_published=WowClass.Status.DRAFT)
+        self.message_user(request, f"Знято з публікації {count} записа/-ів", messages.WARNING)
+
 @admin.register(Specialization)
 class SpecializationAdmin(admin.ModelAdmin):
     list_display = ('title', 'description', 'wow_class', 'role')
