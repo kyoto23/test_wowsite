@@ -27,7 +27,7 @@ class WowClass(models.Model):
         DRAFT = 0, "Чорновик"
         PUBLISHED = 1, "Published"
 
-    title = models.CharField(max_length=30, verbose_name='Назва')
+    title = models.CharField(max_length=30, verbose_name='Назва класу')
     slug = models.SlugField(max_length=20, unique=True, db_index=True, verbose_name="Slug")
     description = models.TextField(blank=True, verbose_name="Опис")
     created = models.DateTimeField(auto_now_add=True, verbose_name="Дата створення")
@@ -55,7 +55,7 @@ class WowClass(models.Model):
         ]
 
 class Specialization(models.Model):
-    title = models.CharField(max_length=30, verbose_name="Назва")
+    title = models.CharField(max_length=30, verbose_name="Назва спеку")
     description = models.TextField(blank=True, default='', verbose_name="Опис")
     slug = models.SlugField(max_length=30, unique=True, db_index=True)
     wow_class = models.ForeignKey("WowClass", on_delete=models.PROTECT, related_name='wow_class', verbose_name="Класс")
@@ -69,7 +69,7 @@ class Specialization(models.Model):
         verbose_name_plural = "Спеціалізації"
 
 class Role(models.Model):
-    title = models.CharField(max_length=10, db_index=True, verbose_name="Назва")
+    title = models.CharField(max_length=10, db_index=True, verbose_name="Назва ролі")
     slug = models.SlugField(max_length=10, unique=True, db_index=True)
 
     def __str__(self):

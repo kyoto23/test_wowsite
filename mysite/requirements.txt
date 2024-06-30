@@ -1,0 +1,12 @@
+asgiref==3.8.1
+DateTime==5.5
+Django==5.0.3
+django-debug-toolbar==4.3.0
+django-taggit==5.0.1
+postgres==4.0
+psycopg2-binary==2.9.9
+psycopg2-pool==1.2
+pytz==2024.1
+setuptools==69.2.0
+sqlparse==0.4.4
+zope.interface==6.2

@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+import logging
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -52,6 +52,43 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+
+    "formatters": {
+        "common_formatter":{
+            "format": "[{levelname}] {asctime} - {module} - {filename} - {message}",
+            "style": "{",
+        }
+    }, 
+
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "formatter": "common_formatter",
+        },
+        "file": {
+            "class": "logging.FileHandler",
+            "formatter": "common_formatter",
+            "filename": "information.log",
+        }
+    },
+    
+    "loggers": {
+        'main': {
+            "handlers": ['console', 'file'],
+            "level": "INFO",
+            "propagate": False,
+        }
+    },
+
+    "root": {
+        "handlers": ["console", "file"],
+        "level": "WARNING",
+    },
+}
 
 ROOT_URLCONF = 'mysite.urls'
 

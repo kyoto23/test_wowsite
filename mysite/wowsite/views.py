@@ -1,11 +1,12 @@
+import logging
 from typing import Any
-from django.db.models.query import QuerySet
-from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from .models import Role, Specialization, Task, WowClass
+from .models import Task, WowClass
 from .services import spec_by_role, published_class
+
+logger = logging.getLogger('main')
 
 menu = [{'id':1, 'title': 'Головна', 'url_name' : 'main'},
         {'id':2, 'title': 'Вхід', 'url_name' : 'login'},
@@ -14,6 +15,7 @@ menu = [{'id':1, 'title': 'Головна', 'url_name' : 'main'},
 
 # Create your views here.
 def main(request):
+    logger.info("123!")
     return render(request, "wowsite/main.html")
 
 def login(request):
