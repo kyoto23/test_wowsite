@@ -5,11 +5,13 @@ from taggit.managers import TaggableManager
 
 # Create your models here.
 
-class PublishedManager(models.Manager): # Менеджер модели
+class PublishedManager(models.Manager):
+    '''Менеджер для перевірки, чи клас опублікований''' # Менеджер модели
     def get_queryset(self):
         return super().get_queryset().filter(is_published=WowClass.Status.PUBLISHED)
 
 class Task(models.Model):
+    '''Модель для тасок(ToDo)'''
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, verbose_name="Користувач")
     title = models.CharField(max_length=100, verbose_name="Задача")
     description = models.TextField(null=True, blank=True, verbose_name="Опис")
@@ -23,6 +25,7 @@ class Task(models.Model):
         ordering = ['complete']
 
 class WowClass(models.Model):
+    '''Модель для класів в WoW'''
     class Status(models.IntegerChoices):
         DRAFT = 0, "Чорновик"
         PUBLISHED = 1, "Published"
@@ -55,6 +58,7 @@ class WowClass(models.Model):
         ]
 
 class Specialization(models.Model):
+    '''Модель для спеків'''
     title = models.CharField(max_length=30, verbose_name="Назва спеку")
     description = models.TextField(blank=True, default='', verbose_name="Опис")
     slug = models.SlugField(max_length=30, unique=True, db_index=True)
@@ -69,6 +73,7 @@ class Specialization(models.Model):
         verbose_name_plural = "Спеціалізації"
 
 class Role(models.Model):
+    '''Модель для ролей в WoW'''
     title = models.CharField(max_length=10, db_index=True, verbose_name="Назва ролі")
     slug = models.SlugField(max_length=10, unique=True, db_index=True)
 
@@ -86,3 +91,16 @@ class Role(models.Model):
         ]
         ordering = ['pk']
     
+class Menu(models.Model):
+    '''Модель для хедер пунктів'''
+    title = models.CharField(max_length=20, db_index=True, verbose_name="Назва пункту")
+    slug = models.SlugField(max_length=10, unique=True, db_index=True)
+
+    def __str__(self):
+        return self.title
+    
+    class Meta:
+        verbose_name = "Пункти меню"
+        verbose_name_plural = "Пункти меню"
+        ordering = ['pk']
+

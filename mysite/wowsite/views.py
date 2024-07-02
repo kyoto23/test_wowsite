@@ -8,11 +8,6 @@ from .services import spec_by_role, published_class
 
 logger = logging.getLogger('main')
 
-menu = [{'id':1, 'title': 'Головна', 'url_name' : 'main'},
-        {'id':2, 'title': 'Вхід', 'url_name' : 'login'},
-        {'id':3, 'title': 'Реєстрація', 'url_name' : 'register'},
-        ]
-
 # Create your views here.
 def main(request):
     logger.info("123!")
