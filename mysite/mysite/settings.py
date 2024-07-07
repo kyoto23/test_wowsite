@@ -83,11 +83,6 @@ LOGGING = {
             "propagate": False,
         }
     },
-
-    "root": {
-        "handlers": ["console", "file"],
-        "level": "WARNING",
-    },
 }
 
 ROOT_URLCONF = 'mysite.urls'

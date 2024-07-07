@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
 from taggit.managers import TaggableManager
+from django.template.defaultfilters import slugify
 
 # Create your models here.
 
@@ -31,7 +32,7 @@ class WowClass(models.Model):
         PUBLISHED = 1, "Published"
 
     title = models.CharField(max_length=30, verbose_name='Назва класу')
-    slug = models.SlugField(max_length=20, unique=True, db_index=True, verbose_name="Slug")
+    slug = models.SlugField(unique=True, db_index=True, verbose_name="Slug")
     description = models.TextField(blank=True, verbose_name="Опис")
     created = models.DateTimeField(auto_now_add=True, verbose_name="Дата створення")
     updated = models.DateTimeField(auto_now=True, verbose_name="Дата оновлення")
@@ -48,6 +49,10 @@ class WowClass(models.Model):
     
     def get_absolute_url(self):
         return reverse("class", kwargs={"slug": self.slug})
+    
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title.lower())
+        super().save(*args, **kwargs)
     
     class Meta:
         verbose_name = "Класси"

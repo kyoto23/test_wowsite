@@ -3,12 +3,15 @@ from .models import Task, WowClass, Role, Specialization
 
 @admin.register(WowClass)
 class WowClassAdmin(admin.ModelAdmin):
+    fields = ['title', 'slug', 'description', 'roles', 'tags', 'is_published']
+    # filter_horizontal = ['roles']
     list_display = ('title', 'created', 'is_published', 'brief_info')
     list_display_links = ('title', )
     list_editable = ('is_published', )
     actions = ['set_published', 'set_draft']
     search_fields = ['title__startswith', 'tags__name']
     list_filter = ['roles__title', 'is_published']
+    readonly_fields = ['slug']
 
     @admin.display(description="Довжина опису", ordering='description')
     def brief_info(self, wowclass: WowClass):

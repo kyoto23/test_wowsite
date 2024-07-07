@@ -10,7 +10,7 @@ logger = logging.getLogger('main')
 
 # Create your views here.
 def main(request):
-    logger.info("123!")
+    logger.info("Log from main!")
     return render(request, "wowsite/main.html")
 
 def login(request):
@@ -27,6 +27,9 @@ def show_roles(request, role_slug):
     data = {'posts': queryset}
 
     return render(request, 'wowsite/classes/index.html', context=data)
+
+def addspec(request):
+    return render(request, 'wowsite/specialization/addspec.html')
 
 class ClassList(ListView):
     model = WowClass
