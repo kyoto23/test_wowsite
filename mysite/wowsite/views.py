@@ -10,7 +10,7 @@ logger = logging.getLogger('main')
 
 # Create your views here.
 def main(request):
-    logger.info("Log from main!")
+    logger.info("Old Logger Message")
     return render(request, "wowsite/main.html")
 
 def login(request):
