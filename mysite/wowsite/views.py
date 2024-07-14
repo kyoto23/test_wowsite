@@ -1,10 +1,12 @@
 import logging
 from typing import Any
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from django.urls import reverse
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from .models import Task, WowClass
+from .models import Task, WowClass, Specialization
 from .services import spec_by_role, published_class
+from .forms import AddClassForm, AddSpecForm
 
 logger = logging.getLogger('main')
 
@@ -24,12 +26,36 @@ def forgot_login(request):
 
 def show_roles(request, role_slug):
     queryset = spec_by_role(role_slug)
-    data = {'posts': queryset}
+    data = {'specs': queryset}
 
     return render(request, 'wowsite/classes/index.html', context=data)
 
-def addspec(request):
-    return render(request, 'wowsite/specialization/addspec.html')
+def add_class(request):
+    if request.method == 'POST':
+        form = AddClassForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('main')
+    else:
+        form = AddClassForm()
+
+    data = {'form': form}
+
+    return render(request, 'wowsite/forms/add.html', data)
+
+def add_spec(request):
+    if request.method == 'POST':
+        form = AddSpecForm(request.POST)
+        if form.is_valid():
+            form.save()
+            role = form.cleaned_data['role']
+            return redirect(reverse("role", kwargs={"role_slug": role.slug}))
+    else:
+        form = AddSpecForm()
+
+    data = {'form': form}
+
+    return render(request, 'wowsite/forms/add.html', data)
 
 class ClassList(ListView):
     model = WowClass

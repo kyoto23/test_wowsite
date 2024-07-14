@@ -73,6 +73,13 @@ class Specialization(models.Model):
     def __str__(self):
         return self.title
     
+    def get_absolute_url(self):
+        return reverse("role", kwargs={"role_slug": self.slug})
+    
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title.lower())
+        super().save(*args, **kwargs)
+
     class Meta:
         verbose_name = "Спеціалізації"
         verbose_name_plural = "Спеціалізації"

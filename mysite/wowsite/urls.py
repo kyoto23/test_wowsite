@@ -7,10 +7,15 @@ loginpatterns = [
     path("forgot_login/", views.forgot_login, name = "forgot_login"),
 ]
 
+addpatterns = [
+    path("class/", views.add_class, name = "addclass"),
+    path("spec/", views.add_spec, name = "addspec"),
+]
+
 urlpatterns = [
     path('', views.main, name="main"),
     path('account/', include(loginpatterns), name='account'),
-    path("addspec/", views.addspec, name = "addspec"),
+    path('add/', include(addpatterns), name='add'),
     path('task/', views.TaskList.as_view(), name='tasks'),
     path('task/<int:pk>/', views.TaskDetail.as_view(), name='task'),
     path('class/', views.ClassList.as_view(), name='classes'),
