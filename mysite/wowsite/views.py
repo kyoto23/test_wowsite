@@ -27,7 +27,7 @@ def register(request):
 def forgot_login(request):
     return render(request, "wowsite/login/forgot_login.html")
 
-class ShowRoles(ListView):
+class ClassByRole(ListView):
     template_name = 'wowsite/classes/specs_by_role.html'
     context_object_name = 'specs'
 
