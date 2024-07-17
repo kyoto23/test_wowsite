@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404
-from .models import WowClass, Specialization, Role
+from .models import Specialization, Role
 
 def spec_by_role(role_slug):
     role = get_object_or_404(Role, slug = role_slug)

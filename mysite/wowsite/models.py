@@ -78,6 +78,7 @@ class Specialization(models.Model):
     
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title.lower())
+        self.title = self.title + " " + str(self.wow_class)
         super().save(*args, **kwargs)
 
     class Meta:

@@ -4,9 +4,7 @@
 {% show_roles %}
 <ul class="list-articles">
 	{% for spec in specs %}
-			{% comment %} <li><div class="article-panel"> {% endcomment %}
 	<p class="first">Категория: {{spec.role.title}}</p>
-    </div>
 				<h2>{{spec.title}}</h2>
     {% autoescape off %}
 	{{spec.description|linebreaks|truncatewords:40}}

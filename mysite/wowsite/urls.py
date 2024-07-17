@@ -9,7 +9,7 @@ loginpatterns = [
 
 addpatterns = [
     path("class/", views.add_class, name = "addclass"),
-    path("spec/", views.add_spec, name = "addspec"),
+    path("spec/", views.AddSpec.as_view(), name = "addspec"),
 ]
 
 urlpatterns = [
@@ -20,7 +20,7 @@ urlpatterns = [
     path('task/<int:pk>/', views.TaskDetail.as_view(), name='task'),
     path('class/', views.ClassList.as_view(), name='classes'),
     path('class/<slug:slug>/', views.ClassDetail.as_view(), name='class'),
-    path('role/<slug:role_slug>', views.show_roles, name='role'),
+    path('role/<slug:role_slug>/', views.ShowRoles.as_view(), name='role'),
 ]
 
 
