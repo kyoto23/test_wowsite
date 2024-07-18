@@ -21,6 +21,6 @@ urlpatterns = [
     path('class/', views.ClassList.as_view(), name='classes'),
     path('class/<slug:slug>/', views.ClassDetail.as_view(), name='class'),
     path('role/<slug:role_slug>/', views.ClassByRole.as_view(), name='role'),
+    path('role/<slug:role_slug>/<slug:spec_slug>/', views.ClassByRoleDetail.as_view(), name='spec'),
 ]
-
 

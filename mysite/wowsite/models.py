@@ -74,16 +74,16 @@ class Specialization(models.Model):
         return self.title
     
     def get_absolute_url(self):
-        return reverse("role", kwargs={"role_slug": self.slug})
+        return reverse("role", kwargs={"role_slug":self.role.slug, "spec_slug": self.slug})
     
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title.lower())
-        self.title = self.title + " " + str(self.wow_class)
         super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = "Спеціалізації"
         verbose_name_plural = "Спеціалізації"
+        ordering = ['wow_class']
 
 class Role(models.Model):
     '''Модель для ролей в WoW'''
@@ -116,4 +116,3 @@ class Menu(models.Model):
         verbose_name = "Пункти меню"
         verbose_name_plural = "Пункти меню"
         ordering = ['pk']
-

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{spec.title}}</h1>
+
+{% if spec.photo %}
+<p><img class="img-article-left" src="{{spec.photo.url}}"></p>
+{% endif %}
+
+{{ spec.description | linebreaks }}
+
+<p><a href="{% url 'role' %}">Back to Roles</a></p>
+{% endblock content %}

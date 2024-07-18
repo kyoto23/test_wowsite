@@ -1,13 +1,9 @@
 import logging
-from typing import Any
-from django.db.models.query import QuerySet
 from django.http.response import HttpResponse as HttpResponse
 from django.shortcuts import redirect, render
-from django.urls import reverse
-from django.views import View
-from django.views.generic.list import ListView
-from django.views.generic.detail import DetailView
-from .models import Task, WowClass
+from django.urls import reverse, reverse_lazy
+from django.views.generic import ListView, DetailView, FormView
+from .models import Specialization, Task, WowClass
 from .services import spec_by_role, published_class
 from .forms import AddClassForm, AddSpecForm
 
@@ -27,13 +23,6 @@ def register(request):
 def forgot_login(request):
     return render(request, "wowsite/login/forgot_login.html")
 
-class ClassByRole(ListView):
-    template_name = 'wowsite/classes/specs_by_role.html'
-    context_object_name = 'specs'
-
-    def get_queryset(self):
-        return spec_by_role(role_slug=self.kwargs['role_slug'])
-
 def add_class(request):
     if request.method == 'POST':
         form = AddClassForm(request.POST)
@@ -45,21 +34,46 @@ def add_class(request):
 
     return render(request, 'wowsite/forms/add.html', context={'form': form})
 
-class AddSpec(View):
-    def get(self, request):
-        form = AddSpecForm()
-        data = {'form': form}
-        return render(request, 'wowsite/forms/add.html', data)
+# class AddSpec(View):
+#     def get(self, request):
+#         form = AddSpecForm()
+#         data = {'form': form}
+#         return render(request, 'wowsite/forms/add.html', data)
 
-    def post(self, request):
-        form = AddSpecForm(request.POST)
+#     def post(self, request):
+#         form = AddSpecForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             role = form.cleaned_data['role']
+#             return redirect(reverse("role", kwargs={"role_slug": role.slug}))
+        
+#         data = {'form': form}
+#         return render(request, 'wowsite/forms/add.html', data)
+
+class AddSpec(FormView):
+    form_class = AddSpecForm
+    template_name = 'wowsite/forms/add.html'
+
+    def form_valid(self, form):
         if form.is_valid():
             form.save()
             role = form.cleaned_data['role']
             return redirect(reverse("role", kwargs={"role_slug": role.slug}))
-        
-        data = {'form': form}
-        return render(request, 'wowsite/forms/add.html', data)
+        return super().form_valid(form)
+    
+    
+class ClassByRole(ListView):
+    template_name = 'wowsite/classes/specs_by_role.html'
+    context_object_name = 'specs'
+
+    def get_queryset(self):
+        return spec_by_role(role_slug=self.kwargs['role_slug'])
+    
+class ClassByRoleDetail(DetailView):
+    model = Specialization
+    template_name = 'wowsite/classes/detail_by_role.html'
+    context_object_name = 'spec'
+    slug_url_kwarg = 'spec_slug'
 
 class ClassList(ListView):
     model = WowClass
@@ -82,4 +96,6 @@ class TaskList(ListView):
 class TaskDetail(DetailView):
     model = Task
     template_name = "wowsite/task/task_detail.html"
+    context_object_name = 'task'
+
 
