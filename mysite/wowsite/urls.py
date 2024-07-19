@@ -8,7 +8,7 @@ loginpatterns = [
 ]
 
 addpatterns = [
-    path("class/", views.add_class, name = "addclass"),
+    path("class/", views.AddClass.as_view(), name = "addclass"),
     path("spec/", views.AddSpec.as_view(), name = "addspec"),
 ]
 

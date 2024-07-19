@@ -74,7 +74,7 @@ class Specialization(models.Model):
         return self.title
     
     def get_absolute_url(self):
-        return reverse("role", kwargs={"role_slug":self.role.slug, "spec_slug": self.slug})
+        return reverse("spec", kwargs={"role_slug":self.role.slug, "spec_slug": self.slug})
     
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title.lower())

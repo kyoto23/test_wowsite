@@ -9,5 +9,5 @@
 
 {{ spec.description | linebreaks }}
 
-<p><a href="{% url 'role' %}">Back to Roles</a></p>
+<p><a href="{% url 'role' spec.role.slug %}">Back to Roles</a></p>
 {% endblock content %}

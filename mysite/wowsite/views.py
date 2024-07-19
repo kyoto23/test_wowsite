@@ -2,7 +2,7 @@ import logging
 from django.http.response import HttpResponse as HttpResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
-from django.views.generic import ListView, DetailView, FormView
+from django.views.generic import ListView, DetailView, CreateView
 from .models import Specialization, Task, WowClass
 from .services import spec_by_role, published_class
 from .forms import AddClassForm, AddSpecForm
@@ -23,45 +23,16 @@ def register(request):
 def forgot_login(request):
     return render(request, "wowsite/login/forgot_login.html")
 
-def add_class(request):
-    if request.method == 'POST':
-        form = AddClassForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('classes')
-    else:
-        form = AddClassForm()
-
-    return render(request, 'wowsite/forms/add.html', context={'form': form})
-
-# class AddSpec(View):
-#     def get(self, request):
-#         form = AddSpecForm()
-#         data = {'form': form}
-#         return render(request, 'wowsite/forms/add.html', data)
-
-#     def post(self, request):
-#         form = AddSpecForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             role = form.cleaned_data['role']
-#             return redirect(reverse("role", kwargs={"role_slug": role.slug}))
-        
-#         data = {'form': form}
-#         return render(request, 'wowsite/forms/add.html', data)
-
-class AddSpec(FormView):
+class AddSpec(CreateView):
     form_class = AddSpecForm
     template_name = 'wowsite/forms/add.html'
 
-    def form_valid(self, form):
-        if form.is_valid():
-            form.save()
-            role = form.cleaned_data['role']
-            return redirect(reverse("role", kwargs={"role_slug": role.slug}))
-        return super().form_valid(form)
+    def get_success_url(self):
+        return self.object.get_absolute_url()
     
-    
+class AddClass(AddSpec):
+    form_class = AddClassForm
+
 class ClassByRole(ListView):
     template_name = 'wowsite/classes/specs_by_role.html'
     context_object_name = 'specs'
@@ -97,5 +68,4 @@ class TaskDetail(DetailView):
     model = Task
     template_name = "wowsite/task/task_detail.html"
     context_object_name = 'task'
-
 
