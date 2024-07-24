@@ -9,13 +9,14 @@
 <body >
     <div class="login-container">
         <h2>Login</h2>
-        <form action="login.php" method="post" aria-labelledby="Login">
+        <form method="post" aria-labelledby="Login">
+            {% csrf_token %}
             <input type="text" name="username" placeholder="Username" required label="Username" maxlength="35" autocomplete="off" >
             <input type="password" name="password" placeholder="Password" label="Password" required maxlength="40" autocomplete="off">
             <button type="submit" aria-label="Submit">Submit</button>
         </form>
-        <a href="/account/register" aria-label="Register an account">Register an account</a>
-        <a href="/account/forgot_login" aria-label="Can't log in?">Can't log in?</a>
+        <a href="{% url 'users:register' %}" aria-label="Register an account">Register an account</a>
+        <a href="{% url 'users:forgot_login' %}" aria-label="Can't log in?">Can't log in?</a>
     </div>
     <div class="block bl"></div>
     <div class="block2 bl"></div>

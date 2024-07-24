@@ -12,15 +12,6 @@ logger = logging.getLogger('main')
 def main(request):
     logger.info("Old Logger Message")
     return render(request, "wowsite/main.html")
-
-def login(request):
-    return render(request, "wowsite/login/login.html")
-
-def register(request):
-    return render(request, "wowsite/login/register.html")
-
-def forgot_login(request):
-    return render(request, "wowsite/login/forgot_login.html")
     
 class AddSpec(CreateView):
     form_class = AddSpecForm

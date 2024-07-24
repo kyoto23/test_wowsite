@@ -20,7 +20,7 @@
             <input type="email" name="account_email" placeholder="Account Email" required autocomplete="off" label="Account Email">
             <input type="password" name="password" placeholder="Password" required maxlength="40" autocomplete="off" label="Password">
             <p><button class="container-register_button" type="submit">Submit</button></p>
-            <a href="/account/login">Do you have an account?</a>
+            <a href="{% url 'users:login' %}">Do you have an account?</a>
         </form>
     </div>
     <div class="block bl"></div>

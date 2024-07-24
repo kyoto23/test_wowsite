@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'wowsite',
+    'users',
     'debug_toolbar',
     'taggit',
 ]
