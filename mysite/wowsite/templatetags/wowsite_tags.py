@@ -6,7 +6,7 @@ register = template.Library()
 @register.inclusion_tag("wowsite/base_and_tags/navigation.html")
 def navigation():
     menu = Menu.objects.all()
-    return {'menu':menu}
+    return {'menu': menu}
 
 @register.inclusion_tag('wowsite/base_and_tags/class_roles.html')
 def show_roles():

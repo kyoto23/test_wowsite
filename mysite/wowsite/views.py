@@ -1,7 +1,7 @@
 import logging
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
-from .utils import DataMixin
+from .utils import DataMixin, SpecMixin
 from .models import Specialization, Task, WowClass
 from .services import spec_by_role, published_class
 from .forms import AddClassForm, AddSpecForm
@@ -13,24 +13,13 @@ def main(request):
     logger.info("Old Logger Message")
     return render(request, "wowsite/main.html")
     
-class AddSpec(CreateView):
+class AddSpec(SpecMixin, CreateView):
     form_class = AddSpecForm
-    template_name = 'wowsite/forms/add.html'
-
-    def get_success_url(self):
-        return self.object.get_absolute_url()
     
-class AddClass(AddSpec):
-    form_class = AddClassForm
-
-class UpdateSpec(UpdateView):
+class UpdateSpec(SpecMixin, UpdateView):
     model = Specialization
     fields = ['title', 'description', 'wow_class', 'role']
-    template_name = 'wowsite/forms/add.html'
     slug_url_kwarg = 'spec_slug'
-
-    def get_success_url(self):
-        return self.object.get_absolute_url()
 
 class SpecByRole(DataMixin, ListView):
     template_name = 'wowsite/classes/specs_by_role.html'
@@ -45,6 +34,9 @@ class SpecByRoleDetail(DetailView):
     template_name = 'wowsite/classes/detail_by_role.html'
     context_object_name = 'spec'
     slug_url_kwarg = 'spec_slug'
+
+class AddClass(AddSpec):
+    form_class = AddClassForm
 
 class ClassList(DataMixin, ListView):
     model = WowClass
