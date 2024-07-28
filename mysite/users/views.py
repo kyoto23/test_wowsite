@@ -10,9 +10,6 @@ class LoginUser(LoginView):
     form_class = AuthenticationForm
     template_name = 'users/auth/login.html'
 
-    def get_success_url(self):
-        return reverse('users:register')
-
 def logout_user(request):
     pass
 
