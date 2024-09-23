@@ -10,9 +10,6 @@ class LoginUser(LoginView):
     form_class = AuthenticationForm
     template_name = 'users/auth/login.html'
 
-def logout_user(request):
-    pass
-
 def register(request):
     return render(request, "users/auth/register.html")
 

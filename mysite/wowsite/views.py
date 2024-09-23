@@ -1,4 +1,6 @@
 import logging
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from .utils import DataMixin, SpecMixin
@@ -8,15 +10,14 @@ from .forms import AddClassForm, AddSpecForm
 
 logger = logging.getLogger('main')
 
-# Create your views here.
 def main(request):
     logger.info("Old Logger Message")
     return render(request, "wowsite/main.html")
     
-class AddSpec(SpecMixin, CreateView):
+class AddSpec(SpecMixin, LoginRequiredMixin, CreateView):
     form_class = AddSpecForm
-    
-class UpdateSpec(SpecMixin, UpdateView):
+
+class UpdateSpec(SpecMixin, LoginRequiredMixin, UpdateView):
     model = Specialization
     fields = ['title', 'description', 'wow_class', 'role']
     slug_url_kwarg = 'spec_slug'
